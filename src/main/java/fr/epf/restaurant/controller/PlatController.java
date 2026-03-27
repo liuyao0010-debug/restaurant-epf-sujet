@@ -1,10 +1,14 @@
 package fr.epf.restaurant.controller;
-
-import fr.epf.restaurant.dto.PlatDTO;
-import fr.epf.restaurant.service.PlatService;
+import fr.epf.restaurant.dao.PlatDao;
+import fr.epf.restaurant.exception.ResourceNotFoundException;
+import fr.epf.restaurant.model.Plat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,21 +17,29 @@ import java.util.List;
 @RequestMapping("/api/plats")
 public class PlatController {
 
-    private final PlatService service;
+    private final PlatDao platDao;
 
-    public PlatController(PlatService service) {
-        this.service = service;
+    public PlatController(PlatDao platDao) {
+        this.platDao = platDao;
     }
 
-    // GET /api/plats
     @GetMapping
-    public List<PlatDTO> getPlats() {
-        return service.getAllPlats();
+    public List<Plat> getAllPlats() {
+        return platDao.findAll();
     }
 
-    // GET /api/plats/{id}
     @GetMapping("/{id}")
-    public PlatDTO getPlat(@PathVariable Long id) {
-        return service.getPlatById(id);
+    public Plat getPlatById(@PathVariable Long id) {
+        Plat plat = platDao.findById(id);
+        if (plat == null) {
+            throw new ResourceNotFoundException("Plat non trouvé avec l'id: " + id);
+        }
+        return plat;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Plat createPlat(@RequestBody Plat plat) {
+        return platDao.save(plat);
     }
 }

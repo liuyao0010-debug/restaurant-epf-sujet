@@ -1,14 +1,17 @@
-// src/main/java/fr/epf/restaurant/dto/IngredientDTO.java
-package fr.epf.restaurant.dto;
+package fr.epf.restaurant.model;
 
-public class IngredientDTO {
+public class Ingredient {
+
     private Long id;
     private String nom;
     private String unite;
     private Double stockActuel;
     private Double seuilAlerte;
 
-    public IngredientDTO(Long id, String nom, String unite, Double stockActuel, Double seuilAlerte) {
+    public Ingredient() {
+    }
+
+    public Ingredient(Long id, String nom, String unite, Double stockActuel, Double seuilAlerte) {
         this.id = id;
         this.nom = nom;
         this.unite = unite;
@@ -16,35 +19,42 @@ public class IngredientDTO {
         this.seuilAlerte = seuilAlerte;
     }
 
-    // getters & setters
     public Long getId() {
         return id;
-    }
-    public String getNom() {
-        return nom;
-    }
-    public String getUnite() {
-        return unite;
-    }
-    public Double getStockActuel() {
-        return stockActuel;
-    }
-    public Double getSeuilAlerte() {
-        return seuilAlerte;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getNom() {
+        return nom;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public String getUnite() {
+        return unite;
+    }
+
     public void setUnite(String unite) {
         this.unite = unite;
     }
+
+    public Double getStockActuel() {
+        return stockActuel;
+    }
+
     public void setStockActuel(Double stockActuel) {
         this.stockActuel = stockActuel;
     }
+
+    public Double getSeuilAlerte() {
+        return seuilAlerte;
+    }
+
     public void setSeuilAlerte(Double seuilAlerte) {
         this.seuilAlerte = seuilAlerte;
     }

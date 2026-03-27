@@ -76,3 +76,20 @@ INSERT INTO FOURNISSEUR_INGREDIENT (fournisseur_id, ingredient_id, prix_unitaire
     (2, 5, 0.31),   -- Transgourmet: Gruyere          0.31 €/g
     (2, 6, 0.09),   -- Transgourmet: Beurre           0.09 €/g
     (2, 7, 0.04);   -- Transgourmet: Pommes de terre  0.04 €/g
+    
+
+-- pour tester GET/api/commandes/client/{id} et GET/api/commandes/fournisseur/{id}
+
+INSERT INTO COMMANDE_CLIENT (client_id, date_commande, statut) 
+VALUES (1, CURRENT_TIMESTAMP, 'EN_ATTENTE');
+
+INSERT INTO LIGNE_COMMANDE_CLIENT (commande_client_id, plat_id, quantite) 
+VALUES (1, 1, 2);  
+
+
+INSERT INTO COMMANDE_FOURNISSEUR (fournisseur_id, date_commande, statut) 
+VALUES (1, CURRENT_TIMESTAMP, 'EN_ATTENTE');
+
+
+INSERT INTO LIGNE_COMMANDE_FOURNISSEUR (commande_fournisseur_id, ingredient_id, quantite_commandee, prix_unitaire) 
+VALUES (1, 2, 12.0, 0.42);  
